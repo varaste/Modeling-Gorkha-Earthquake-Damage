@@ -30,6 +30,7 @@ class GameState:
 		means player one is at (0, 0) and player two is at (1, 0)
 	"""
 
+
 	def __init__(self):
 		# single-underscore prefix on attribute names means
 		# that the attribute is "private" (Python doesn't truly
@@ -39,3 +40,29 @@ class GameState:
 		self._board[-1][-1] = 1  # block lower-right corner
 		self._parity = 0
 		self._player_locations = [None, None]
+
+
+	def get_legal_moves(self):
+			"""
+			Return a list of all legal moves available to the
+			active player.  Each player should get a list of all
+			empty spaces on the board on their first move, and
+			otherwise they should get a list of all open spaces
+			in a straight line along any row, column or diagonal
+			from their current position. (Players CANNOT move
+			through obstacles or blocked squares.)
+			"""
+			loc = self._player_locations[self._parity]
+			if not loc:
+				return self._get_blank_spaces()
+			moves = []
+			rays = [(1, 0), (1, -1), (0, -1), (-1, -1),
+					(-1, 0), (-1, 1), (0, 1), (1, 1)]
+			for dx, dy in rays:
+				_x, _y = loc
+				while 0 <= _x + dx < xlim and 0 <= _y + dy < ylim:
+					_x, _y = _x + dx, _y + dy
+					if self._board[_x][_y]:
+						break
+					moves.append((_x, _y))
+			return moves
