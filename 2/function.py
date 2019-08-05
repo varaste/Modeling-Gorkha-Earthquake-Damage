@@ -84,3 +84,8 @@ class GameState:
 						break
 					moves.append((_x, _y))
 			return moves
+
+	def _get_blank_spaces(self):
+			""" Return a list of blank spaces on the board."""
+			return [(x, y) for y in range(ylim) for x in range(xlim)
+					if self._board[x][y] == 0]
