@@ -1,7 +1,3 @@
-# NOTE: This function is provided for reference; it is not imported or used
-# by the test code when you submit (this allows for dependency isolation
-# in the test cases)
-
 from copy import deepcopy
 
 xlim, ylim = 3, 2  # board dimensions
